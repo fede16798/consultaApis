@@ -15,15 +15,29 @@
                 <button id="button-1">GET BY ID</button>
             </div>
             <div class="container__cards-2">
-                <button id="button-2">GET BY ID</button>
+                <button id="button-2">POST</button>
+            </div>
+            <div class="container__cards-3">
+                <button id="button-3">DELETE</button>
             </div>
         </div>
     </div>
 
-    <div class="modal-background">
+    <div class="modal-background modal-post">
+        <div class="form-post__div">
+            <label for="name" class="form-post__label">Ingrese el nombre</label> 
+            <input type="text" name="name" id="name" class="form-post__input">
+            <label for="job" class="form-post__label">Ingrese el trabajo</label> 
+            <input type="text" name="job" id="job" class="form-post__input">
+            <button type="button" class="btn-modal btn-form-post" id="send-post">Enviar</button>
+            <button type="button" class="btn-modal btn-form-post" id="close-post">Cerrar</button>
+        </div>
+    </div>
+
+    <div class="modal-background modal-result">
         <div class="modal">
             <div class="resultado"></div>
-            <button type="button" class="btn-close">Cerrar</button>
+            <button type="button" class="btn-modal" id="btn-close">Cerrar</button>
         </div>
     </div>
     

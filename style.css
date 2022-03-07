@@ -52,7 +52,11 @@
     grid-column: 2/3;
     grid-row: 1/2;
 }
-
+.container__cards-3 {
+    padding: 1.2rem;
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
 #button-1 {
     background: #24e;
     
@@ -60,7 +64,10 @@
 #button-2 {
     background: #2e4;
 }
-
+#button-3 { 
+    background: #db0303;
+}
+/*--------------------------MODALS--------------------------*/
 .modal-background {
     width: 100vw;
     height: 100vh;
@@ -68,8 +75,48 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+.modal-post {
     display: none;
     opacity: 0;
+}
+
+.modal-result {
+    display: none;
+    opacity: 0;
+}
+
+.btn-modal{
+    padding: .5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: none;
+    color: #fff;
+    background: #db0303;
+    cursor: pointer;
+}
+
+#send-post {
+    background: #1ea535;    
+    margin-bottom: 0;
+
+}
+
+.form-post__div {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+
+    background: #fff;
+    width: 50%;
+    border: 2px solid #000;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.form-post__label {
+    margin: 1rem 0;
 }
 
 .modal {
@@ -79,17 +126,6 @@
     text-align: center;
     padding-top: .5rem;
     margin-top: 1rem;
-}
-
-.btn-close {
-    width: 20%;
-    padding: .5rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    border: none;
-    color: #fff;
-    background: #db0303;
-    cursor: pointer;
 }
 
 @keyframes modalOn {
