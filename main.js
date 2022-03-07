@@ -5,7 +5,31 @@ let modalPost = document.querySelector('.modal-post');
 let result = document.querySelector(".resultado");
 const closePost = document.getElementById('close-post');
 
+const deleteUser = async () => {
+    try {
+        let id = parseInt(prompt("Please insert an id"));
+        let request = await axios.delete(`https://reqres.in/api/users/${id}`);
+        console.log(request);
+        let resultDelete = messageToDelete(id);
+        console.log(resultDelete);
+        openModal(resultDelete);
+    } catch (e) {
+        errorMessage(e);
+    }  
+}
 
+const messageToDelete = (id) => {
+    const frag = document.createDocumentFragment();
+    const par = document.createElement('P');
+    par.innerHTML = `You have deleted the user number ${id}`;
+    const div = document.createElement("DIV");
+    div.appendChild(par);
+    frag.appendChild(div);
+
+    return frag;
+}
+
+document.getElementById("button-3").addEventListener('click', deleteUser);
 
 const post = async () => {
     let name, job, id;
@@ -23,14 +47,12 @@ const post = async () => {
             let resultPost = messageToPost(name, job, id);
             openModal(resultPost);
         } else {
-            alert("Por favor complete los campos correspondientes");
+            alert("Please, complete the form and try again");
         }
-    } catch (e) {
-        const par = document.createElement('P');
-        par.innerHTML = `<b>Se produjo un eror</b>`;
-        openModal(par);
+    } catch (e) {           
+        errorMessage(e);
     }
-}
+};
 
 document.getElementById("send-post").addEventListener("click", post);
 
@@ -49,24 +71,27 @@ const messageToPost = (name, job, id) => {
     div.appendChild(idP);
     frag.appendChild(div);
     return frag;
-}
+};
+
+document.getElementById("button-2").addEventListener("click", () => {
+    modalPost.style.display = "flex";
+    modalPost.style.animation = "modalOn 1s forwards";
+});
 
 const getById = async () => {
     let result, name, lastName, email;
-    try {
-        let id = parseInt(prompt("Please enter an id"));
-        let info = await axios(`https://reqres.in/api/users/${id}`);
-        name = info.data.data.first_name;
-        lastName = info.data.data.last_name;
-        email = info.data.data.email;
-        result = messageById(name, lastName, email);
-        openModal(result);        
-    } catch (e) {
-        const par = document.createElement('P');
-        par.innerHTML = `<b>Se produjo un eror</b>`;
-        openModal(par);
-    }
-}
+    let id = parseInt(prompt("Please insert an id"));
+        try {
+                let info = await axios(`https://reqraes.in/api/users/${id}`);
+                name = info.data.data.first_name;
+                lastName = info.data.data.last_name;
+                email = info.data.data.email;
+                result = messageById(name, lastName, email);
+                openModal(result);
+        } catch (e) {
+            errorMessage(e);
+        }
+};
 
 document.getElementById("button-1").addEventListener("click", getById);
 
@@ -77,7 +102,7 @@ const messageById = (name, lastName, email) => {
     const last_name = document.createElement("P");
     last_name.innerHTML = `Last name: <b>${lastName}</b>`;
     const mail = document.createElement("P");
-    mail.innerHTML = `mail: <b>${email}</b>`;
+    mail.innerHTML = `Mail: <b>${email}</b>`;
     const div = document.createElement("DIV");
 
     div.appendChild(firstName);
@@ -85,28 +110,29 @@ const messageById = (name, lastName, email) => {
     div.appendChild(mail);
     frag.appendChild(div);
     return frag;
-}
+};
 
 const openModal = (message) => {
     result.appendChild(message);
     modalResult.style.display = "flex";
     modalResult.style.animation = "modalOn 1s forwards";
-}
+};
 
 btnCloseModal.addEventListener("click", () => {
     result.removeChild(result.firstElementChild);
     modalResult.style.display = "none";
     modalResult.style.animation = "mmodalOff 1s forwards";
-})
+});
 
 closePost.addEventListener("click", () => {
     document.getElementById('name').value = "";
     document.getElementById('job').value = "";
     modalPost.style.display = "none";
     modalPost.style.animation = "mmodalOff 1s forwards";
-})
+});
 
-document.getElementById("button-2").addEventListener("click", () => {
-    modalPost.style.display = "flex";
-    modalPost.style.animation = "modalOn 1s forwards";
-})
+const errorMessage = (e) => {
+    const par = document.createElement('P');
+    par.innerHTML = `<b>An error has occurred:</b> ${e}`;
+    openModal(par);
+}
